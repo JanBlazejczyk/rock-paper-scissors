@@ -1,6 +1,5 @@
 // Rock Paper Scissors game functions
 
-// computerPlay()
 // randomly return a string of either "Rock", "Paper" or "Scissors"
 function computerPlay() {
     const choices = ["Rock", "Paper", "Scissors"];
@@ -8,16 +7,14 @@ function computerPlay() {
     return choice;
 }
 
-
+// Display both scores
 function displayScore(playerScore, computerScore) {
     console.log(`Your score: ${playerScore}`);
     console.log(`Computer score: ${computerScore}`);
 }
 
-
-// playRound(playerSelectrion, computerSelection)
-// compare player Selection against the choice of the computer
-// return a string that declares who won the round and why
+// compare player hand against the choice of the computer
+// returns a string that declares who won the round and why
 function playRound(playerSelection, computerSelection) {
 
     console.log(`Computer choose: ${computerSelection}`)
@@ -49,14 +46,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-
-// game()
-// plays a game of five rounds - for loop x5
-// prompt player for his choice (case insensitive)
-// call computerPlay to get the computers hand
-// call play round to evaluate who won
-// keep score and report the winner at the end
-
+// plays a game of five rounds, keeps score and reports who won at the end
 function game() {
     computerScore = 0
     playerScore = 0
