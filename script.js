@@ -16,8 +16,10 @@ function displayScore(playerScore, computerScore) {
 // compare player hand against the choice of the computer
 // returns a string that declares who won the round and why
 function playRound(playerSelection, computerSelection) {
+    let messageAboutComputerChoice = `Computer choose: ${computerSelection}`
+    let displayMessage = document.querySelector(".message")
+    displayMessage.textContent = messageAboutComputerChoice;
 
-    console.log(`Computer choose: ${computerSelection}`)
 
     if (computerSelection.toUpperCase() === playerSelection.toUpperCase()) {
         result = "It's a draw";
@@ -74,4 +76,20 @@ function game() {
     }
 }
 
-game();
+
+// we take all the buttons
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        let playerSelection = button.textContent.toUpperCase();
+
+
+        let displayResult = document.querySelector(".result");
+        displayResult.textContent = playRound(playerSelection, computerPlay());
+    })
+})
+
+// change all of your console.logs into DOM methods to be displayed in the .results
+
+
