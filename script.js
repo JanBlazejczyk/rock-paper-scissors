@@ -1,6 +1,6 @@
 // Rock Paper Scissors game logic
 
-// select all the buttons
+// select all the choice buttons
 const buttons = document.querySelectorAll('button');
 
 // initialize both scores and round number
@@ -8,60 +8,27 @@ let playerScore = 0;
 let computerScore = 0;
 let round = 1;
 
-// After the user clicks on any button
+const LAST_ROUND = 5;
+
+// users click on any button calls game() function which contains all the helper functions 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        // player selction is the button content
+        // player's hand choice is the clicked button content
         let playerSelection = button.textContent.toUpperCase();
+        // game() takes the players choice (string), and computer's choice, that's why it is called with 
+        // computerPlay function as this functions returns a string with computer's choice
         game(playerSelection, computerPlay())
     });
 });
 
-function advanceRound(result, round) {
-    if (!result.startsWith("It's a draw")) {
-        round++;
-    }
-    return round;
-}
-
-
-// given the round number it displays it in the paragraph
-// if the round number is more than five it shows the message that the game has finished
-function displayRound(round) {
-    let placeholder = document.querySelector('p');
-
-    if (round <= 5) {
-        placeholder.textContent = `Round ${round} of 5`;
-    } else {
-        placeholder.textContent = `Game Finished, played rounds: 5 of 5`;
-    }
-}
-
 function game(playerSelection, computerSelection) {
-    displayRound(round);
+    displayRound(round, LAST_ROUND);
     playRound(playerSelection, computerSelection);
-    // Score is incremented and displayed
-    // TODO make it a function incrementScore
-    // if (round <= 5 && result.startsWith("You won")) {
-    //     playerScore += 1;
-    // } else if (round <= 5 && result.startsWith("You loose")) {
-    //     computerScore += 1;
-    // }
-    computerScore = incrementScore(playerScore, computerScore, round);
-    playerScore = incrementScore(playerScore, computerScore, round);
-    evaluateScore(playerScore, computerScore);
+    computerScore = incrementComputerScore(computerScore, round, LAST_ROUND);
+    playerScore = incrementPlayerScore(playerScore, round, LAST_ROUND);
+    evaluateScore(playerScore, computerScore, LAST_ROUND);
     displayScore(playerScore, computerScore);
     round = advanceRound(result, round);
-}
-
-function incrementScore(playerScore, computerScore, round) {
-    if (round <= 5 && result.startsWith("You won")) {
-        playerScore += 1;
-        return playerScore;
-    } else if (round <= 5 && result.startsWith("You loose")) {
-        computerScore += 1;
-        return computerScore;
-    }
 }
 
 // randomly return a string of either "Rock", "Paper" or "Scissors"
@@ -74,34 +41,22 @@ function computerPlay() {
     return choice;
 }
 
-function evaluateScore(playerScore, computerScore) {
-    let messagePlaceholder = document.querySelector('.message');
-    let resultPlaceholder = document.querySelector('.result');
-    let scorePlaceholder = document.querySelector('.score');
 
-    if (round > 5) {
-        messagePlaceholder.textContent = "";
-        scorePlaceholder.textContent = "";
-        if (computerScore > playerScore) {
-            resultPlaceholder.textContent = `You loose the game, refresh the page to play again`;
-        } else if (computerScore < playerScore) {
-            resultPlaceholder.textContent = `You won the game, refresh the page to play again`;
-        } else {
-            resultPlaceholder.textContent = `It's a draw, refresh the page to play again`;
-        }
+// given the round number it displays it in the paragraph
+// if the round number is more than five it shows the message that the game has finished
+function displayRound(round, lastRound) {
+    let placeholder = document.querySelector('p');
+
+    if (round <= lastRound) {
+        placeholder.textContent = `Round ${round} of 5`;
+    } else {
+        placeholder.textContent = `Game Finished, played rounds: 5 of 5`;
     }
-}
-
-
-// Display both scores in the score div
-function displayScore(playerScore, computerScore) {
-    let placeholder = document.querySelector(".score");
-    placeholder.textContent = `Your score: ${playerScore} 
-                                Computer score: ${computerScore}`
 }
 
 // compare player hand against the choice of the computer
 // returns a string that declares who won the round and why
+// displays the result in div .results
 function playRound(playerSelection, computerSelection) {
     placeholder = document.querySelector('.result');
 
@@ -138,5 +93,62 @@ function playRound(playerSelection, computerSelection) {
         placeholder.textContent = result;
         return result;
     }
+}
+
+// takes computerScore (int) and round (int)
+// returns computerScore (int) incremented by one if player has lost
+// and the round is not bigger than the last round (the game is still on)
+function incrementComputerScore(computerScore, round, lastRound) {
+    if (round <= lastRound && result.startsWith("You loose")) {
+        computerScore++;
+        return computerScore;
+    } else {
+        return computerScore;
+    }
+}
+
+// takes playerScore (int) and round (int)
+// returns playerScore (int) incremented by one if player has won
+// and the round is not bigger than the last round (the game is still on)
+function incrementPlayerScore(playerScore, round, lastRound) {
+    if (round <= lastRound && result.startsWith("You won")) {
+        playerScore += 1;
+        return playerScore;
+    } else {
+        return playerScore;
+    }
+}
+
+function evaluateScore(playerScore, computerScore, lastRoud) {
+    let messagePlaceholder = document.querySelector('.message');
+    let resultPlaceholder = document.querySelector('.result');
+    let scorePlaceholder = document.querySelector('.score');
+
+    if (round > lastRoud) {
+        messagePlaceholder.textContent = "";
+        scorePlaceholder.textContent = "";
+        if (computerScore > playerScore) {
+            resultPlaceholder.textContent = `You loose the game, refresh the page to play again`;
+        } else if (computerScore < playerScore) {
+            resultPlaceholder.textContent = `You won the game, refresh the page to play again`;
+        } else {
+            resultPlaceholder.textContent = `It's a draw, refresh the page to play again`;
+        }
+    }
+}
+
+// Display both scores in the score div
+function displayScore(playerScore, computerScore) {
+    let placeholder = document.querySelector(".score");
+    placeholder.textContent = `Your score: ${playerScore} 
+    Computer score: ${computerScore}`
+}
+
+// If the result is not a draw, increment round
+function advanceRound(result, round) {
+    if (!result.startsWith("It's a draw")) {
+        round++;
+    }
+    return round;
 }
 
