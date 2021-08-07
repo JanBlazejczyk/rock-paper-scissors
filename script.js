@@ -18,6 +18,7 @@ buttons.forEach((button) => {
         game(playerSelection, computerPlay())
 
         // the round number is displayed in the round number p tag
+        // TODO make it a function advanceRound
         if (!result.startsWith("It's a draw")) {
             round++;
         }
@@ -39,13 +40,12 @@ function displayRound(round) {
 function game(playerSelection, computerSelection) {
     playRound(playerSelection, computerSelection);
     // Score is incremented and displayed
+    // TODO make it a function incrementScore
     if (round <= 5 && result.startsWith("You won")) {
         playerScore += 1;
     } else if (round <= 5 && result.startsWith("You loose")) {
         computerScore += 1;
     }
-    console.log(playerScore);
-    console.log(computerScore);
     evaluateScore(playerScore, computerScore);
     displayScore(playerScore, computerScore);
 }
@@ -88,45 +88,40 @@ function displayScore(playerScore, computerScore) {
 
 // compare player hand against the choice of the computer
 // returns a string that declares who won the round and why
+// TODO see if it will work with a placeholdwer defined at the top only once
 function playRound(playerSelection, computerSelection) {
+    placeholder = document.querySelector('.result');
+
     if (computerSelection.toUpperCase() === playerSelection.toUpperCase()) {
         result = "It's a draw";
-        placeholder = document.querySelector('.result');
         placeholder.textContent = result;
         return result;
     } else if (computerSelection.toUpperCase() === "ROCK" && playerSelection.toUpperCase() === "PAPER") {
         result = "You won, paper covers rock";
-        placeholder = document.querySelector('.result');
         placeholder.textContent = result;
         return result;
     } else if (computerSelection.toUpperCase() === "ROCK" && playerSelection.toUpperCase() === "SCISSORS") {
         result = "You loose, rock breakes scissors";
-        placeholder = document.querySelector('.result');
         placeholder.textContent = result;
         return result;
     } else if (computerSelection.toUpperCase() === "PAPER" && playerSelection.toUpperCase() === "SCISSORS") {
         result = "You won, scissors cut paper";
-        placeholder = document.querySelector('.result');
         placeholder.textContent = result;
         return result;
     } else if (computerSelection.toUpperCase() === "PAPER" && playerSelection.toUpperCase() === "ROCK") {
         result = "You loose, paper covers rock";
-        placeholder = document.querySelector('.result');
         placeholder.textContent = result;
         return result;
     } else if (computerSelection.toUpperCase() === "SCISSORS" && playerSelection.toUpperCase() === "ROCK") {
         result = "You won, rock brakes scissors";
-        placeholder = document.querySelector('.result');
         placeholder.textContent = result;
         return result
     } else if (computerSelection.toUpperCase() === "SCISSORS" && playerSelection.toUpperCase() === "PAPER") {
         result = "You loose, scissors cut paper";
-        placeholder = document.querySelector('.result');
         placeholder.textContent = result;
         return result;
     } else {
         result = "Incorrect hand value";
-        placeholder = document.querySelector('.result');
         placeholder.textContent = result;
         return result;
     }
