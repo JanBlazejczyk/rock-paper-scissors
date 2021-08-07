@@ -13,17 +13,17 @@ buttons.forEach((button) => {
     button.addEventListener('click', () => {
         // player selction is the button content
         let playerSelection = button.textContent.toUpperCase();
-
-        displayRound(round);
         game(playerSelection, computerPlay())
-
-        // the round number is displayed in the round number p tag
-        // TODO make it a function advanceRound
-        if (!result.startsWith("It's a draw")) {
-            round++;
-        }
     });
 });
+
+function advanceRound(result, round) {
+    if (!result.startsWith("It's a draw")) {
+        round++;
+    }
+    return round;
+}
+
 
 // given the round number it displays it in the paragraph
 // if the round number is more than five it shows the message that the game has finished
@@ -38,16 +38,30 @@ function displayRound(round) {
 }
 
 function game(playerSelection, computerSelection) {
+    displayRound(round);
     playRound(playerSelection, computerSelection);
     // Score is incremented and displayed
     // TODO make it a function incrementScore
-    if (round <= 5 && result.startsWith("You won")) {
-        playerScore += 1;
-    } else if (round <= 5 && result.startsWith("You loose")) {
-        computerScore += 1;
-    }
+    // if (round <= 5 && result.startsWith("You won")) {
+    //     playerScore += 1;
+    // } else if (round <= 5 && result.startsWith("You loose")) {
+    //     computerScore += 1;
+    // }
+    computerScore = incrementScore(playerScore, computerScore, round);
+    playerScore = incrementScore(playerScore, computerScore, round);
     evaluateScore(playerScore, computerScore);
     displayScore(playerScore, computerScore);
+    round = advanceRound(result, round);
+}
+
+function incrementScore(playerScore, computerScore, round) {
+    if (round <= 5 && result.startsWith("You won")) {
+        playerScore += 1;
+        return playerScore;
+    } else if (round <= 5 && result.startsWith("You loose")) {
+        computerScore += 1;
+        return computerScore;
+    }
 }
 
 // randomly return a string of either "Rock", "Paper" or "Scissors"
@@ -81,14 +95,13 @@ function evaluateScore(playerScore, computerScore) {
 
 // Display both scores in the score div
 function displayScore(playerScore, computerScore) {
-    let displayResult = document.querySelector(".score");
-    displayResult.textContent = `Your score: ${playerScore} 
+    let placeholder = document.querySelector(".score");
+    placeholder.textContent = `Your score: ${playerScore} 
                                 Computer score: ${computerScore}`
 }
 
 // compare player hand against the choice of the computer
 // returns a string that declares who won the round and why
-// TODO see if it will work with a placeholdwer defined at the top only once
 function playRound(playerSelection, computerSelection) {
     placeholder = document.querySelector('.result');
 
