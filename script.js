@@ -62,37 +62,23 @@ function playRound(playerSelection, computerSelection) {
 
     if (computerSelection.toUpperCase() === playerSelection.toUpperCase()) {
         result = "It's a draw";
-        placeholder.textContent = result;
-        return result;
     } else if (computerSelection.toUpperCase() === "ROCK" && playerSelection.toUpperCase() === "PAPER") {
         result = "You won, paper covers rock";
-        placeholder.textContent = result;
-        return result;
     } else if (computerSelection.toUpperCase() === "ROCK" && playerSelection.toUpperCase() === "SCISSORS") {
         result = "You loose, rock breakes scissors";
-        placeholder.textContent = result;
-        return result;
     } else if (computerSelection.toUpperCase() === "PAPER" && playerSelection.toUpperCase() === "SCISSORS") {
         result = "You won, scissors cut paper";
-        placeholder.textContent = result;
-        return result;
     } else if (computerSelection.toUpperCase() === "PAPER" && playerSelection.toUpperCase() === "ROCK") {
         result = "You loose, paper covers rock";
-        placeholder.textContent = result;
-        return result;
     } else if (computerSelection.toUpperCase() === "SCISSORS" && playerSelection.toUpperCase() === "ROCK") {
         result = "You won, rock brakes scissors";
-        placeholder.textContent = result;
-        return result
     } else if (computerSelection.toUpperCase() === "SCISSORS" && playerSelection.toUpperCase() === "PAPER") {
         result = "You loose, scissors cut paper";
-        placeholder.textContent = result;
-        return result;
     } else {
         result = "Incorrect hand value";
-        placeholder.textContent = result;
-        return result;
     }
+    placeholder.textContent = result;
+    return result;
 }
 
 // takes computerScore (int) and round (int)
@@ -112,7 +98,7 @@ function incrementComputerScore(computerScore, round, lastRound) {
 // and the round is not bigger than the last round (the game is still on)
 function incrementPlayerScore(playerScore, round, lastRound) {
     if (round <= lastRound && result.startsWith("You won")) {
-        playerScore += 1;
+        playerScore++;
         return playerScore;
     } else {
         return playerScore;
