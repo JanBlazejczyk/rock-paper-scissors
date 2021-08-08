@@ -1,7 +1,7 @@
 // Rock Paper Scissors game logic
 
 // select all the choice buttons
-const buttons = document.querySelectorAll('button');
+const images = document.querySelectorAll('img');
 
 // initialize both scores and round number
 let playerScore = 0;
@@ -11,10 +11,10 @@ let round = 1;
 const LAST_ROUND = 5;
 
 // users click on any button calls game() function which contains all the helper functions 
-buttons.forEach((button) => {
-    button.addEventListener('click', () => {
+images.forEach((image) => {
+    image.addEventListener('click', () => {
         // player's hand choice is the clicked button content
-        let playerSelection = button.textContent.toUpperCase();
+        let playerSelection = image.id.toUpperCase();
         // game() takes the players choice (string), and computer's choice, that's why it is called with 
         // computerPlay function as this functions returns a string with computer's choice
         game(playerSelection, computerPlay())
@@ -45,12 +45,12 @@ function computerPlay() {
 // given the round number it displays it in the paragraph
 // if the round number is more than five it shows the message that the game has finished
 function displayRound(round, lastRound) {
-    let placeholder = document.querySelector('p');
+    let placeholder = document.querySelector('.round-number');
 
     if (round <= lastRound) {
-        placeholder.textContent = `Round ${round} of 5`;
+        placeholder.innerHTML = `<span class="rock-color">Round ${round} of 5</span>`
     } else {
-        placeholder.textContent = `Game Finished, played rounds: 5 of 5`;
+        placeholder.innerHTML = `<span class="scissors-color">Game Finished, played rounds: 5 of 5</span>`;
     }
 }
 
