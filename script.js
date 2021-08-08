@@ -31,13 +31,20 @@ function game(playerSelection, computerSelection) {
     round = advanceRound(result, round);
 }
 
-// randomly return a string of either "Rock", "Paper" or "Scissors"
+// randomly return a string of either "Rock", "Paper" or "Scissors" - that still needs to happen
+// what changes is that we need to display "Computer choice:" in one div and then the icon below
+
 function computerPlay() {
-    const choices = ["Rock", "Paper", "Scissors"];
+    const choices = ["rock", "paper", "scissors"];
     let choice = choices[Math.floor(Math.random() * 3)];
-    let messageAboutComputerChoice = `Computer choose: ${choice}`
-    let placeholder = document.querySelector(".message");
-    placeholder.textContent = messageAboutComputerChoice;
+    let messageAboutComputerChoice = `<h4><span class="paper-color">Computer choice</span></h4>`
+    let messagePlaceholder = document.querySelector(".message");
+    messagePlaceholder.innerHTML = messageAboutComputerChoice;
+
+    let iconPlaceholder = document.querySelector(".computer-choice-icon");
+    iconPlaceholder.innerHTML = `<img src="./images/${choice}-icon.png" class="computer-choice-image">`
+
+
     return choice;
 }
 

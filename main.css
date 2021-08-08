@@ -3,11 +3,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.result-box {
-    border-style: solid;
-    height: 5rem;
-}
-
 h1 {
     text-align: center;
     font-size: 3rem;
@@ -68,3 +63,11 @@ h3 {
     border: 0.2rem solid #ffe53e;
 }
 
+/* Computer choice */
+.message {
+    text-align: center;
+}
+
+.computer-choice-icon {
+    text-align: center;
+}
