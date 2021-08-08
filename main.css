@@ -18,6 +18,11 @@ h3 {
     justify-content: space-around;
 }
 
+hr {
+    border-color: #45a0ff;
+    border-radius: 0.5rem;
+}
+
 /* Corresponding colors for inline span styling of h1 and h3 */
 .rock-color {
     color: #e43ba7;
@@ -63,11 +68,26 @@ h3 {
     border: 0.2rem solid #ffe53e;
 }
 
-/* Computer choice */
-.message {
+/* Hand choices */
+.hand-choices {
+    display: flex;
+    justify-content: space-around;
+}
+
+.player-choice-caption {
     text-align: center;
 }
 
-.computer-choice-icon {
+.computer-choice-caption {
     text-align: center;
+}
+
+.result {
+    text-align: center;
+}
+
+.result-container {
+    display: flex;
+    align-items: center;
+    margin: 0rem 0.5rem 0rem 0.5rem;
 }
