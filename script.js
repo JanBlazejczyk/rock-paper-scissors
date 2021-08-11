@@ -17,7 +17,7 @@ let playerIconPlaceholder = document.querySelector(".player-choice-icon");
 let roundPlaceholder = document.querySelector('.round-number');
 let scorePlaceholder = document.querySelector('.score');
 
-const LAST_ROUND = 5;
+const LAST_ROUND = prompt("How many rounds would you like to play?");
 
 // users click on any button calls game() function which contains all the helper functions 
 images.forEach((image) => {
@@ -67,9 +67,9 @@ function displayPlayerHand(playerSelection) {
 function displayRound(round, lastRound) {
 
     if (round <= lastRound) {
-        roundPlaceholder.innerHTML = `<span class="rock-color">Round ${round} of 5</span>`
+        roundPlaceholder.innerHTML = `<span class="rock-color">Round ${round} of ${LAST_ROUND}</span>`
     } else {
-        roundPlaceholder.innerHTML = `<span class="scissors-color">Game Finished, played rounds: 5 of 5</span>`;
+        roundPlaceholder.innerHTML = `<span class="scissors-color">Game Finished, played rounds: ${LAST_ROUND} of ${LAST_ROUND}</span>`;
     }
 }
 

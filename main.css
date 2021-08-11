@@ -56,14 +56,17 @@ h3 {
 
 .rock-image:hover {
     border: 0.2rem solid #e43ba7;
+    cursor: grab;
 }
 
 .paper-image:hover {
     border: 0.2rem solid #45a0ff;
+    cursor: grab;
 }
 
 .scissors-image:hover {
     border: 0.2rem solid #ffe53e;
+    cursor: grab;
 }
 
 /* Horizontal line splitting the choice images area from hand choices area */
