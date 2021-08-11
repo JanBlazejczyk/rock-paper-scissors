@@ -4,6 +4,19 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.rights {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    margin: 0;
+    color: #45a0ff;
+    font-size: 0.7rem;
+}
+
+.rights > a {
+    color: #45a0ff;
+}
+
 /* Headings text is centered */
 h1 {
     text-align: center;
