@@ -8,6 +8,15 @@ let playerScore = 0;
 let computerScore = 0;
 let round = 1;
 
+// initialize placeholders for text and images
+let resultPlaceholder = document.querySelector('.result');
+let computerCaptionPlaceholder = document.querySelector(".computer-choice-caption");
+let computerIconPlaceholder = document.querySelector(".computer-choice-icon");
+let playerCaptionPlaceholder = document.querySelector(".player-choice-caption");
+let playerIconPlaceholder = document.querySelector(".player-choice-icon");
+let roundPlaceholder = document.querySelector('.round-number');
+let scorePlaceholder = document.querySelector('.score');
+
 const LAST_ROUND = 5;
 
 // users click on any button calls game() function which contains all the helper functions 
@@ -27,8 +36,6 @@ function game(playerSelection, computerSelection) {
     playRound(playerSelection, computerSelection);
     computerScore = incrementComputerScore(computerScore, round, LAST_ROUND);
     playerScore = incrementPlayerScore(playerScore, round, LAST_ROUND);
-    console.log(playerScore);
-    console.log(computerScore);
     evaluateScore(playerScore, computerScore, LAST_ROUND);
     displayScore(playerScore, computerScore);
     round = advanceRound(result, round);
@@ -40,34 +47,29 @@ function computerPlay() {
     const choices = ["rock", "paper", "scissors"];
     let choice = choices[Math.floor(Math.random() * 3)];
     let computerChoiceCaption = `<span class="paper-color">Computer choice</span>`
-    let computerCaptionPlaceholder = document.querySelector(".computer-choice-caption");
     computerCaptionPlaceholder.innerHTML = computerChoiceCaption;
 
-    let iconPlaceholder = document.querySelector(".computer-choice-icon");
-    iconPlaceholder.innerHTML = `<img src="./images/${choice}-icon.png" class="computer-choice-image">`
+    computerIconPlaceholder.innerHTML = `<img src="./images/${choice}-icon.png" class="computer-choice-image">`
 
     return choice;
 }
 
 function displayPlayerHand(playerSelection) {
     let playerChoiceCaption = `<span class="paper-color">Player choice</span>`;
-    let playerCaptionPlaceholder = document.querySelector(".player-choice-caption");
     playerCaptionPlaceholder.innerHTML = playerChoiceCaption;
 
-    let iconPlaceholder = document.querySelector(".player-choice-icon");
-    iconPlaceholder.innerHTML = `<img src="./images/${playerSelection}-icon.png" class="player-choice-image">`
+    playerIconPlaceholder.innerHTML = `<img src="./images/${playerSelection}-icon.png" class="player-choice-image">`
 }
 
 
 // given the round number it displays it in the paragraph
 // if the round number is more than five it shows the message that the game has finished
 function displayRound(round, lastRound) {
-    let placeholder = document.querySelector('.round-number');
 
     if (round <= lastRound) {
-        placeholder.innerHTML = `<span class="rock-color">Round ${round} of 5</span>`
+        roundPlaceholder.innerHTML = `<span class="rock-color">Round ${round} of 5</span>`
     } else {
-        placeholder.innerHTML = `<span class="scissors-color">Game Finished, played rounds: 5 of 5</span>`;
+        roundPlaceholder.innerHTML = `<span class="scissors-color">Game Finished, played rounds: 5 of 5</span>`;
     }
 }
 
@@ -75,7 +77,6 @@ function displayRound(round, lastRound) {
 // returns a string that declares who won the round and why
 // displays the result in div .results
 function playRound(playerSelection, computerSelection) {
-    placeholder = document.querySelector('.result');
 
     if (computerSelection.toUpperCase() === playerSelection.toUpperCase()) {
         result = `<span class="scissors-color">It's a draw</span>`;
@@ -94,7 +95,7 @@ function playRound(playerSelection, computerSelection) {
     } else {
         result = "Incorrect hand value";
     }
-    placeholder.innerHTML = result;
+    resultPlaceholder.innerHTML = result;
     return result;
 }
 
@@ -123,19 +124,13 @@ function incrementPlayerScore(playerScore, round, lastRound) {
 }
 
 function evaluateScore(playerScore, computerScore, lastRoud) {
-    let computerCaptionPlaceholder = document.querySelector('.computer-choice-caption');
-    let resultPlaceholder = document.querySelector('.result');
-    let scorePlaceholder = document.querySelector('.score');
-    let computerHandIconPlaceholder = document.querySelector('.computer-choice-icon');
-    let playerCaptionPlaceholder = document.querySelector('.player-choice-caption');
-    let playerhandIconPlaceholder = document.querySelector(".player-choice-icon");
 
     if (round > lastRoud) {
         computerCaptionPlaceholder.innerHTML = "";
         scorePlaceholder.textContent = "";
-        computerHandIconPlaceholder.innerHTML = "";
+        computerIconPlaceholder.innerHTML = "";
         playerCaptionPlaceholder.innerHTML = "";
-        playerhandIconPlaceholder.innerHTML = "";
+        playerIconPlaceholder.innerHTML = "";
         if (computerScore > playerScore) {
             resultPlaceholder.innerHTML = `<h3><span class="paper-color">You loose the game, refresh the page to play again</span></h3>`;
         } else if (computerScore < playerScore) {
@@ -148,8 +143,7 @@ function evaluateScore(playerScore, computerScore, lastRoud) {
 
 // Display both scores in the score div
 function displayScore(playerScore, computerScore) {
-    let placeholder = document.querySelector(".score");
-    placeholder.innerHTML = `<span class="rock-color">Your score: ${playerScore} 
+    scorePlaceholder.innerHTML = `<span class="rock-color">Your score: ${playerScore} 
     Computer score: ${computerScore}</span>`;
 }
 
