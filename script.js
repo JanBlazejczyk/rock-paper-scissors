@@ -1,9 +1,9 @@
 // Rock Paper Scissors game logic
 
-// select all the choice buttons
+// select all the choice icons
 const images = document.querySelectorAll('img');
 
-// initialize both scores and round number
+// initialize scores and round number
 let playerScore = 0;
 let computerScore = 0;
 let round = 1;
@@ -17,15 +17,18 @@ let playerIconPlaceholder = document.querySelector(".player-choice-icon");
 let roundPlaceholder = document.querySelector('.round-number');
 let scorePlaceholder = document.querySelector('.score');
 
+// prompt a user for a number of rounds he/she wants to play
 const LAST_ROUND = prompt("How many rounds would you like to play?");
 
-// users click on any button calls game() function which contains all the helper functions 
+// user click on any icon calls game() function which contains all the helper functions 
 images.forEach((image) => {
     image.addEventListener('click', () => {
-        // player's hand choice is the clicked button content
+        // scroll down to the bottom of the page when the user clicks on image
+        window.scrollTo(0, document.body.scrollHeight);
+        // player's hand choice is the clicked button id
         let playerSelection = image.id;
         // game() takes the players choice (string), and computer's choice, that's why it is called with 
-        // computerPlay function as this functions returns a string with computer's choice
+        // computerPlay function as this function returns a string with computer's choice
         game(playerSelection, computerPlay())
     });
 });
@@ -41,8 +44,8 @@ function game(playerSelection, computerSelection) {
     round = advanceRound(result, round);
 }
 
-// randomly return a string of either "Rock", "Paper" or "Scissors" - that still needs to happen
-// what changes is that we need to display "Computer choice:" in one div and then the icon below
+// display computer's choice icon with a caption
+// randomly return a string of either "Rock", "Paper" or "Scissors"
 function computerPlay() {
     const choices = ["rock", "paper", "scissors"];
     let choice = choices[Math.floor(Math.random() * 3)];
@@ -54,6 +57,7 @@ function computerPlay() {
     return choice;
 }
 
+// display player's choice icon with a caption
 function displayPlayerHand(playerSelection) {
     let playerChoiceCaption = `<span class="paper-color">Player choice</span>`;
     playerCaptionPlaceholder.innerHTML = playerChoiceCaption;
@@ -62,10 +66,9 @@ function displayPlayerHand(playerSelection) {
 }
 
 
-// given the round number it displays it in the paragraph
-// if the round number is more than five it shows the message that the game has finished
+// given the round number display it in the paragraph
+// if the round number is bigger than last round number show the message that the game has finished
 function displayRound(round, lastRound) {
-
     if (round <= lastRound) {
         roundPlaceholder.innerHTML = `<span class="rock-color">Round ${round} of ${LAST_ROUND}</span>`
     } else {
@@ -75,7 +78,7 @@ function displayRound(round, lastRound) {
 
 // compare player hand against the choice of the computer
 // returns a string that declares who won the round and why
-// displays the result in div .results
+// display the result in div .results
 function playRound(playerSelection, computerSelection) {
 
     if (computerSelection.toUpperCase() === playerSelection.toUpperCase()) {
@@ -113,7 +116,7 @@ function incrementComputerScore(computerScore, round, lastRound) {
 
 // takes playerScore (int) and round (int)
 // returns playerScore (int) incremented by one if player has won
-// and the round is not bigger than the last round (the game is still on)
+// if the round is not bigger than the last round (the game is still on)
 function incrementPlayerScore(playerScore, round, lastRound) {
     if (round <= lastRound && result.includes("You won")) {
         playerScore++;
@@ -123,6 +126,8 @@ function incrementPlayerScore(playerScore, round, lastRound) {
     }
 }
 
+// takes playerScore (int), computerScore (int) and lastRound (int)
+// display the result of the game, clear other placeholders
 function evaluateScore(playerScore, computerScore, lastRoud) {
 
     if (round > lastRoud) {
@@ -141,13 +146,15 @@ function evaluateScore(playerScore, computerScore, lastRoud) {
     }
 }
 
+// takes playerScore (int) and computerScore (int) 
 // Display both scores in the score div
 function displayScore(playerScore, computerScore) {
     scorePlaceholder.innerHTML = `<span class="rock-color">Your score: ${playerScore} 
     Computer score: ${computerScore}</span>`;
 }
 
-// If the result is not a draw, increment round
+// takes result (str) and round (int)
+// If the result is not a draw, increment the round number and return it
 function advanceRound(result, round) {
     if (!result.includes("It's a draw")) {
         round++;
