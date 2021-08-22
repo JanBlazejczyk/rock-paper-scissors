@@ -44,7 +44,7 @@ h3 {
 /* Container with three images to choose the hand */
 .choice-images {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 /* Image borders and hovering effects */
@@ -52,18 +52,21 @@ h3 {
     border: 0.2rem solid #1f1f21;
     border-radius: 0.5rem;
     opacity: 0.8;
+    margin-right: 2rem;
 }
 
 .paper-image {
     border: 0.2rem solid #1f1f21;
     border-radius: 0.5rem;
     opacity: 0.8;
+    margin-right: 2rem;
 }
 
 .scissors-image {
     border: 0.2rem solid #1f1f21;
     border-radius: 0.5rem;
     opacity: 0.8;
+    margin-right: 2rem;
 }
 
 .rock-image:hover {
@@ -90,7 +93,13 @@ hr {
 /* Container for displaying player choice and computer choice + the result message */
 .hand-choices {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+}
+
+.player-hand,
+.result-container,
+.computer-hand {
+    margin-right: 2rem;
 }
 
 /* Centers the captions above icons */
@@ -106,7 +115,7 @@ hr {
 .result-container {
     display: flex;
     align-items: center;
-    margin: 0rem 0.5rem 0rem 0.5rem;
+    /* margin: 0rem 0.5rem 0rem 0.5rem; */
 }
 
 /* Centering result message */
